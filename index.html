@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>M Baqir's Personal Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* * Core Variables for a Professional & Dynamic Theme
+     * These define colors and effects that are sophisticated and engaging.
+     */
+    :root {
+      --bg-light: #f0f2f5; /* Very light gray-blue */
+      --bg-dark: #1a202c;  /* Deep charcoal blue */
+      --text-light: #2d3748; /* Dark gray for light theme */
+      --text-dark: #e2e8f0;  /* Light gray for dark theme */
+
+      --accent-primary: #3182ce; /* Professional Blue */
+      --accent-secondary: #805ad5; /* Complementary Violet */
+      --accent-tertiary: #38b2ac; /* Teal for highlights */
+
+      --card-bg-light: #ffffff; /* Pure white for light mode cards */
+      --card-bg-dark: #2d3748;   /* Dark gray for dark mode cards */
+      --card-border-light: #e2e8f0; /* Subtle border for light mode */
+      --card-border-dark: #4a5568;  /* Subtle border for dark mode */
+
+      --shadow-light: rgba(0, 0, 0, 0.08); /* Soft shadow for light mode */
+      --shadow-dark: rgba(0, 0, 0, 0.3);   /* Deeper shadow for dark mode */
+
+      --header-blur-bg-light: rgba(255, 255, 255, 0.8);
+      --header-blur-bg-dark: rgba(26, 32, 44, 0.8);
+
+      --glow-primary: rgba(49, 130, 206, 0.6); /* Blue glow */
+      --glow-secondary: rgba(128, 90, 213, 0.6); /* Violet glow */
+      --glow-tertiary: rgba(56, 178, 172, 0.6); /* Teal glow */
+    }
+
+    /* Dark mode adaptations (default) */
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      font-family: 'Poppins', sans-serif;
+      transition: background 0.8s ease-in-out, color 0.6s ease-in-out; /* Slightly faster theme change */
+      overflow-x: hidden; /* Prevent horizontal scrollbar from animations */
+      scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+    }
+
+    /* Light mode adaptations */
+    body.light {
+      background: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    /* ************************************************************ */
+    /* * HEADER & NAVIGATION */
+    /* ************************************************************ */
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 60px; /* Reduced padding for smaller header */
+      background: var(--header-blur-bg-dark);
+      position: fixed; /* Header remains fixed */
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      backdrop-filter: blur(15px) saturate(1.5); /* Slightly less intense blur */
+      box-shadow: 0 3px 15px var(--shadow-dark); /* Softer shadow */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Finer border */
+      box-sizing: border-box; /* Include padding in width */
+      transition: background 0.5s ease;
+      transform: translateY(-100%); /* Initial state for header entrance */
+      animation: headerSlideDown 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+      animation-delay: 0.2s; /* Delay header entrance slightly */
+    }
+
+    @keyframes headerSlideDown {
+        to { transform: translateY(0); }
+    }
+
+    body.light header {
+        background: var(--header-blur-bg-light);
+        box-shadow: 0 3px 15px var(--shadow-light);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    header h1 {
+      font-size: 32px; /* Smaller, more refined name size */
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary));
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textGradientFlow 8s linear infinite;
+      text-shadow: 0 0 6px rgba(49, 130, 206, 0.3);
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+    header h1:hover {
+        transform: scale(1.03);
+    }
+
+    @keyframes textGradientFlow {
+      0% { background-position: 0% }
+      100% { background-position: 300% }
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 25px; /* Slightly less gap */
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li a {
+        color: var(--text-dark);
+        text-decoration: none;
+        font-size: 1em; /* Standard size */
+        font-weight: 500;
+        position: relative;
+        padding: 4px 0;
+        transition: all 0.25s ease;
+        letter-spacing: 0.3px;
+        overflow: hidden; /* For shine effect */
+    }
+    body.light nav ul li a {
+        color: var(--text-light);
+    }
+
+    nav ul li a::after { /* Dynamic underline effect */
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 1.5px; /* Finer line */
+        background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        transform: translateX(-50%);
+        border-radius: 1px;
+        z-index: 1; /* Ensure it's above ::before */
+    }
+
+    nav ul li a::before { /* Shine effect for underline */
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transition: transform 0.4s ease;
+        z-index: 0; /* Ensure it's below ::after */
+    }
+
+    nav ul li a:hover::before {
+        transform: translateX(100%);
+    }
+
+    nav ul li a.active::after,
+    nav ul li a:hover::after {
+        width: 100%;
+        box-shadow: 0 0 8px var(--glow-primary); /* Softer glow */
+    }
+
+    nav ul li a:hover {
+        color: var(--accent-primary);
+        transform: translateY(-1px);
+    }
+
+    nav ul li a.active {
+        animation: activeLinkPulse 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes activeLinkPulse {
+        from { transform: scale(1); opacity: 1; }
+        to { transform: scale(1.02); opacity: 0.9; }
+    }
+
+
+    /* Toggle Switch Button */
+    .theme-switch {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .theme-switch-label {
+      width: 45px; /* Compact width */
+      height: 25px; /* Compact height */
+      position: relative;
+      display: block;
+      background: var(--card-border-dark); /* Default dark grey for dark theme */
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.4s ease;
+    }
+    body.light .theme-switch-label {
+        background: var(--card-border-light); /* Light grey for light theme */
+    }
+
+    .theme-switch-label::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 19px; /* Size of the circle */
+      height: 19px;
+      background: var(--accent-primary); /* Circle color */
+      border-radius: 50%;
+      transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Springy transition */
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    }
+
+    .theme-switch input[type="checkbox"] {
+      display: none;
+    }
+
+    .theme-switch input[type="checkbox"]:checked + .theme-switch-label {
+      background: var(--accent-tertiary); /* Greenish when checked/light theme */
+    }
+
+    .theme-switch input[type="checkbox"]:checked + .theme-switch-label::after {
+      transform: translateX(20px); /* Move circle to right */
+      background: var(--text-dark); /* White circle when checked/light theme */
+    }
+
+    .theme-switch-icon {
+      font-size: 1.1em;
+      color: var(--text-dark);
+      transition: color 0.4s ease;
+    }
+    body.light .theme-switch-icon {
+      color: var(--text-light);
+    }
+
+
+    /* ************************************************************ */
+    /* * SECTION CONTENT STYLES & ANIMATIONS (Scroll-Triggered) */
+    /* ************************************************************ */
+
+    /* Padding for entire body to accommodate fixed header */
+    body {
+        padding-top: 80px; /* Adjust this value based on header height */
+    }
+
+    /* Base Section Styles - No absolute positioning anymore! */
+    section {
+      min-height: 100vh; /* Each section tries to fill the viewport */
+      padding: 60px 80px; /* Overall section padding */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box; /* Include padding in min-height */
+      position: relative; /* For z-index and pseudo-elements */
+      opacity: 0; /* Hidden by default for scroll-based animation */
+      transform: translateY(50px); /* Initial position for scroll-based animation */
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Smooth fade-in/slide-in */
+    }
+
+    /* Class added by JS when section is in view */
+    section.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    h2 {
+      font-size: 56px; /* Slightly smaller, more professional heading */
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      margin-bottom: 50px;
+      text-align: center;
+      background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textGradientFlow 10s linear infinite; /* Continuous flow */
+      text-shadow: 0 0 8px rgba(49, 130, 206, 0.4);
+      position: relative;
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s ease;
+    }
+
+    h2::after { /* Animated underline */
+      content: "";
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      position: absolute;
+      left: 0;
+      bottom: -15px;
+      border-radius: 1.5px;
+      transform-origin: center;
+      transform: scaleX(0); /* Initial state for animation */
+      opacity: 0;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s ease;
+    }
+
+    section.in-view h2 {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    section.in-view h2::after {
+        transform: scaleX(1);
+        opacity: 1;
+        animation: underlinePulse 2s ease infinite alternate; /* Continuous pulse */
+        animation-delay: 0.6s;
+    }
+    @keyframes underlinePulse {
+        0%, 100% { transform: scaleX(1); box-shadow: 0 0 10px var(--glow-primary); }
+        50% { transform: scaleX(0.98) translateY(2px); box-shadow: 0 0 20px var(--glow-secondary); }
+    }
+
+
+    /* Card Container */
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        max-width: 1100px; /* Slightly narrower content area */
+        width: 100%;
+        transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    section.in-view .card-container {
+        transform: translateY(0);
+        opacity: 1;
+        transition-delay: 0.3s; /* Delay container animation slightly after heading */
+    }
+
+
+    /* Individual Card Styles */
+    .card {
+      background: var(--card-bg-dark);
+      border: 1px solid var(--card-border-dark);
+      padding: 35px;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px var(--shadow-dark);
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease, border 0.4s ease, background 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      text-align: left; /* Align text within card */
+    }
+    body.light .card {
+        background: var(--card-bg-light);
+        border: 1px solid var(--card-border-light);
+        box-shadow: 0 8px 25px var(--shadow-light);
+    }
+
+    .card::before { /* Subtle radial glow on hover */
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
+      border-radius: 50%;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
+      z-index: -1;
+    }
+
+    .card:hover::before {
+      width: 300%;
+      height: 300%;
+      opacity: 0.07;
+    }
+
+    .card:hover {
+      transform: translateY(-8px) rotateX(3deg) scale(1.01);
+      box-shadow: 0 12px 35px var(--glow-primary);
+      border-color: var(--accent-primary);
+      cursor: pointer;
+    }
+
+    .card:hover h3 {
+        color: var(--accent-secondary);
+        transform: translateX(5px);
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .card p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 15px;
+        flex-grow: 1; /* Allow paragraphs to take space */
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .card:hover p {
+        transform: translateY(-3px);
+        opacity: 0.9;
+    }
+
+    /* Glow Button */
+    .glow-button {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 10px 24px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      background-size: 200% auto;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      box-shadow: 0 0 10px var(--glow-primary);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      z-index: 1; /* Establish a stacking context for its children */
+      border: 1.5px solid transparent;
+    }
+
+    .glow-button::after { /* Pulsating glow effect (behind button content) */
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(255,255,255,0.2), transparent 70%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: width 0.3s, height 0.3s, opacity 0.3s;
+      z-index: 0; /* Changed from -1 to 0 to be part of the button's stacking context */
+    }
+
+    .glow-button::before { /* Light sweep effect on hover (behind button content but above ::after) */
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 30%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: skewX(-20deg);
+        transition: transform 0.6s ease-out;
+        z-index: 0; /* Changed from 2 to 0 to be behind the main button text/content */
+    }
+
+    /* Ensuring button text/content is on top for hover interaction */
+    .glow-button > * { /* Target immediate children like text nodes implicitly, or if spans are used */
+        position: relative;
+        z-index: 2; /* Ensures text/content is above pseudo-elements for hover capture */
+    }
+
+
+    .glow-button:hover::after {
+      width: 300%;
+      height: 300%;
+      opacity: 1;
+    }
+
+    .glow-button:hover::before {
+        transform: translateX(450%) skewX(-20deg); /* Sweep across */
+    }
+
+    .glow-button:hover {
+      background-position: 100% 0;
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 0 20px var(--glow-secondary), 0 0 30px var(--accent-secondary);
+      border-color: var(--accent-tertiary);
+      animation: buttonBorderPulse 1s infinite alternate; /* Border pulse on hover */
+    }
+
+    @keyframes buttonBorderPulse {
+        from { border-color: var(--accent-tertiary); }
+        to { border-color: var(--glow-primary); }
+    }
+
+
+    /* ************************************************************ */
+    /* * AMBIENT BACKGROUND EFFECTS */
+    /* ************************************************************ */
+
+    /* Floating Particles */
+    .bubbles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bubbles span {
+      position: absolute;
+      width: 25px; height: 25px; /* Slightly smaller particles */
+      background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 50%;
+      animation: floatOrbit 30s linear infinite, bloomPulse 3s ease-in-out infinite alternate; /* Added bloom pulse */
+      opacity: 0.04; /* Even more subtle */
+      box-shadow: 0 0 8px var(--glow-primary);
+      filter: blur(2px);
+      will-change: transform, opacity;
+    }
+
+    @keyframes floatOrbit {
+      0% { transform: translate(0, 100vh) scale(0.5); opacity: 0; }
+      10% { opacity: 0.04; }
+      100% { transform: translate(100vw, -10vh) scale(1.2); opacity: 0; }
+    }
+
+    @keyframes bloomPulse {
+        0%, 100% { transform: scale(1); filter: blur(2px); }
+        50% { transform: scale(1.1); filter: blur(4px); }
+    }
+
+    /* Individual particle randomness - Adjust for new size */
+    .bubbles span:nth-child(1) { left: 10%; animation-delay: 0s; width: 20px; height: 20px; }
+    .bubbles span:nth-child(2) { left: 20%; animation-delay: 3s; width: 30px; height: 30px; }
+    .bubbles span:nth-child(3) { left: 30%; animation-delay: 6s; width: 18px; height: 18px; }
+    .bubbles span:nth-child(4) { left: 40%; animation-delay: 9s; width: 35px; height: 35px; }
+    .bubbles span:nth-child(5) { left: 50%; animation-delay: 12s; width: 25px; height: 25px; }
+    .bubbles span:nth-child(6) { left: 60%; animation-delay: 15s; width: 23px; height: 23px; }
+    .bubbles span:nth-child(7) { left: 70%; animation-delay: 18s; width: 40px; height: 40px; }
+    .bubbles span:nth-child(8) { left: 80%; animation-delay: 21s; width: 16px; height: 16px; }
+    .bubbles span:nth-child(9) { left: 90%; animation-delay: 24s; width: 28px; height: 28px; }
+    .bubbles span:nth-child(10) { left: 5%; animation-delay: 27s; width: 22px; height: 22px; }
+    .bubbles span:nth-child(11) { left: 15%; animation-delay: 30s; width: 33px; height: 33px; }
+    .bubbles span:nth-child(12) { left: 25%; animation-delay: 33s; width: 20px; height: 20px; }
+
+    /* Footer */
+    footer {
+      padding: 30px; /* Reduced footer padding */
+      text-align: center;
+      font-size: 15px;
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      box-sizing: border-box;
+      z-index: 1;
+      transition: background 0.5s ease, color 0.5s ease, border-top 0.5s ease;
+    }
+    body.light footer {
+        background: var(--bg-light);
+        color: var(--text-light);
+        border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    /* ************************************************************ */
+    /* * RESPONSIVE ADJUSTMENTS */
+    /* ************************************************************ */
+
+    @media (max-width: 1200px) {
+        body { padding-top: 70px; } /* Adjust for smaller header */
+        header { padding: 12px 40px; }
+        nav ul { gap: 20px; }
+        section { padding: 50px 60px; }
+        h2 { font-size: 48px; margin-bottom: 40px; }
+        .card-container { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; max-width: 1000px; }
+        .card { padding: 30px; }
+        .card h3 { font-size: 22px; }
+        .card p { font-size: 15px; }
+        .glow-button { padding: 9px 20px; }
+    }
+
+    @media (max-width: 768px) {
+        body { padding-top: 100px; } /* More padding as header stacks */
+        header {
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px 20px;
+            position: sticky; /* Sticky header for better mobile scrolling */
+            top: 0;
+            animation: none; /* Disable header entrance anim on mobile */
+            transform: translateY(0);
+        }
+        nav ul { flex-wrap: wrap; justify-content: center; gap: 10px; }
+        nav ul li a { font-size: 0.9em; }
+        nav ul li a.active { animation: none; } /* Disable active link pulse on mobile */
+        header h1 { font-size: 28px; }
+        .theme-switch { margin-top: 5px; } /* Add small margin */
+
+        section {
+            padding: 40px 20px;
+            min-height: auto; /* Allow sections to shrink on mobile */
+            opacity: 1; /* Always visible on mobile, no scroll anims for sections */
+            transform: none; /* Reset transform */
+            transition: none; /* No transition for sections themselves */
+        }
+        h2 { font-size: 38px; margin-bottom: 30px; }
+        h2::after { height: 2px; bottom: -8px; }
+        .card-container { grid-template-columns: 1fr; gap: 20px; }
+        .card { padding: 25px; transform: none; transition: all 0.3s ease; } /* Simpler card anims */
+        .card:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 6px 15px var(--shadow-light); }
+        .card:hover h3 { transform: translateX(0); } /* Disable content shift on mobile hover */
+        .card p { transition: none; } /* Disable content shift on mobile hover */
+        .card:hover p { transform: translateY(0); opacity: 1; }
+        .glow-button { padding: 8px 18px; font-size: 0.8em; transform: none; transition: all 0.3s ease; }
+        .glow-button:hover { transform: translateY(-2px) scale(1.01); box-shadow: 0 0 10px var(--glow-primary); animation: none; /* Disable border pulse on mobile */ }
+        .bubbles span { width: 15px; height: 15px; filter: blur(1px); animation-duration: 15s !important; animation: floatOrbit 15s linear infinite; } /* Smaller/faster bubbles */
+        footer { padding: 20px; font-size: 14px; }
+    }
+
+    @media (max-width: 480px) {
+        header h1 { font-size: 24px; }
+        h2 { font-size: 32px; }
+        .card { padding: 20px; }
+        .card h3 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bubbles">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <header>
+    <h1>Mohammed Baqir</h1>
+    <nav>
+      <ul>
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#work" class="nav-link">Work</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="theme-switch">
+      <span class="theme-switch-icon">🌙</span>
+      <input type="checkbox" id="themeToggle" class="theme-switch-input">
+      <label for="themeToggle" class="theme-switch-label"></label>
+      <span class="theme-switch-icon">☀️</span>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="page">
+      <h2>Welcome to My Portfolio</h2>
+      <div class="card-container">
+          <div class="card">
+            <h3>Build &nbsp;&nbsp;&nbsp;  Visualise  &nbsp;&nbsp;&nbsp; Empower   </h3>
+            <p>I'm a Frontend Developer currently in my second year of AI & Data Science. My goal is to create highly interactive and impactful web solutions, constantly honing my skills in user experience and modern web technologies.</p>
+            <a href="#about" class="glow-button nav-link">Learn More</a>
+          </div>
+      </div>
+    </section>
+
+    <section id="about" class="page">
+      <h2>About Me</h2>
+      <div class="card-container">
+          <div class="card">
+            <p>I’m a Frontend Developer and a Second-Year Engineering student specializing in AI and Data Science. I build clean, interactive, and pixel-perfect web interfaces using pure HTML CSS and JavaScript. Currently focused on strengthening my core in programming, math, and AI, I’m always exploring new tools and techniques. Passionate about learning and creating, I aim to bring ideas to life through elegant and user-focused design.
+
+.</p>
+          </div>
+      </div>
+    </section>
+
+    <section id="skills" class="page">
+      <h2>My Skills</h2>
+      <div class="card-container">
+        <div class="card">
+          <h3>Core Competencies</h3>
+          <p>Expert in HTML5, CSS3 (Flexbox, Responsive Design), and basic JavaScript. Proficient in creating advanced animations, transitions, and highly interactive UI elements using pure HTML & CSS. Comfortable developing clean, structured, and accessible layouts without relying on JS frameworks</p>
+        </div>
+        <div class="card">
+          <h3>Tools & Methodologies</h3>
+          <p>Skilled in Figma, Canva, and basic AutoCAD for design and prototyping. Experienced with Git/GitHub (if you use version control). Comfortable using Google Forms for basic data collection and lightweight tool integration. Strong focus on clean code, reusability, and visual consistency.</p>
+        </div>
+        <div class="card">
+          <h3>Problem Solving & Optimization</h3>
+          <p>Adept at solving complex frontend issues with a logical and performance-first mindset. Focused on optimizing load times, improving user flows, and ensuring smooth experiences across devices. Practiced in debugging, layout fixes, and responsive adjustments for seamless UX</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="page">
+      <h2>My Work</h2>
+      <div class="card-container">
+        <div class="card">
+          <h3>KICKSTART'25 Website</h3>
+          <p>Developed for a high-stakes Alumni Cell hiring task, this project is a showcase of state-of-the-art, custom CSS animations and a fully adaptive responsive design. Every detail is meticulously optimized for various screen sizes, delivering unparalleled visual fidelity and performance, demonstrating a zero-compromise approach to pure CSS web development.</p>
+          <a href="https://mbaqir18786.github.io/ALUMINICELL-KJSCE-KICKSTART-25-event/" target="_blank" class="glow-button">Explore Live</a>
+        </div>
+        <div class="card">
+          <h3>Amazon Clone </h3>
+          <p>A fully responsive Advanced Amazon WebPage made using only HTML & CSS — no JavaScript, no frameworks. It features a sleek layout, product cards, and a contact form for user interaction</p>
+          <a href="https://mbaqir18786.github.io/AmazonWebPage/" class="glow-button">View</a>
+        </div>
+        <div class="card">
+          <h3>Currently Building Something Extraordinary</h3>
+          <p>I’m working on a high-impact frontend project that pushes the boundaries of what's possible using pure HTML, CSS, and micro-interactions — with absolutely zero JavaScript dependencies.
+This project is under active development and will showcase next-level animations, responsiveness, and performance optimization.
+Stay tuned — it’s crafted to redefine immersive user experience, and I’ll reveal more soon!</p>
+          <a href="under-construction.html" class="glow-button">Coming Soon</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="page">
+      <h2>Experience</h2>
+      <div class="card-container">
+        <div class="card">
+            <h1>C Programming Logic Architect – InternGravity:</h1>
+          <p>  Completed an intensive internship focused on mastering low-level memory management, data structures, and file handling using C.
+Delivered modular and efficient codebases, applying clean coding principles to solve complex problems.
+Known for producing error-free, high-performance solutions, and received recognition for precision and quality across submissions. </p>
+        </div>
+        <div class="card">
+            <h1>Joint Head of Tech Team – Alumni Cell, KJSCE</h1>
+          <p>Driving digital transformation as Joint Head of the Tech Team, managing and leading key technical initiatives for college-wide alumni programs.
+Architecting interactive websites, portals, and event platforms using only core frontend technologies like HTML CSS and JavaScript.
+Focused on UI/UX excellence, responsive design, and ensuring seamless digital experiences that scale across devices and audiences.</p>
+        </div>
+        
+    </section>
+
+    <section id="contact" class="page">
+      <h2>Connect with Me</h2>
+      <div class="card-container">
+          <div class="card">
+            <p>Let's forge the future of web experiences together. I am actively seeking collaborations for groundbreaking projects and opportunities that demand a meticulous eye for design and a passion for cutting-edge frontend development. Feel free to reach out for a deeper discussion, project inquiries, or simply to connect and share insights.</p>
+            <p>Email: <a href="mailto:baqirab224@gmail.com" class="glow-button">baqirab224@gmail.com</a></p>
+            <p>LinkedIn: <a href="https://www.linkedin.com/in/mohammed-baqir-bandarkar/" target="_blank" class="glow-button">Mohammed Baqir Bandarkar</a></p>
+            <p>GitHub: <a href="https://github.com/mbaqir18786" target="_blank" class="glow-button">mbaqir18786</a></p>
+            <p>Instagram: <a href="https://www.instagram.com/m_baqir_18/" target="_blank" class="glow-button">m_baqir_18</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Forged in VS Code. Styled with precision. © 2025 Mohammed Baqir.
+
+
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggle = document.getElementById('themeToggle');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('.page'); // Sections are now 'pages'
+
+      // --- Theme Toggle Logic ---
+      // Check for saved theme preference or default to dark
+      if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light');
+        themeToggle.checked = true;
+      }
+
+      themeToggle.addEventListener('change', () => {
+        if (themeToggle.checked) {
+          document.body.classList.add('light');
+          localStorage.setItem('theme', 'light');
+        } else {
+          document.body.classList.remove('light');
+          localStorage.setItem('theme', 'dark');
+        }
+      });
+
+      // --- Scroll-triggered Section Animations ---
+      const observerOptions = {
+        root: null, // viewport as the root
+        rootMargin: '0px',
+        threshold: 0.3 // Trigger when 30% of the section is visible
+      };
+
+      const sectionObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            // Deactivate previous active link and activate current one
+            navLinks.forEach(link => {
+              if (link.getAttribute('href') === `#${entry.target.id}`) {
+                document.querySelector('.nav-link.active')?.classList.remove('active');
+                link.classList.add('active');
+              }
+            });
+          } else {
+            entry.target.classList.remove('in-view'); // Remove class when out of view
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach(section => {
+        sectionObserver.observe(section);
+      });
+
+      // --- Smooth Scroll for Navigation Links ---
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+
+          if (targetElement) {
+            // Remove active from all and add to clicked
+            navLinks.forEach(nav => nav.classList.remove('active'));
+            this.classList.add('active');
+
+            // Scroll to the target element
+            window.scrollTo({
+              top: targetElement.offsetTop - document.querySelector('header').offsetHeight + 1, // Adjust for fixed header height
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // Initial check for 'home' section on load (since it's at the top)
+      // This ensures 'home' section is animated and its nav link is active on initial load
+      const homeSection = document.getElementById('home');
+      if (homeSection) {
+        // A slight delay to ensure header animation plays first
+        setTimeout(() => {
+            homeSection.classList.add('in-view');
+        }, 500); // Adjust delay as needed
+      }
+    });
+  </script>
+</body>
+</html>
