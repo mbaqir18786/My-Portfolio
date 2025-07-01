@@ -46,6 +46,4 @@ My-Portfolio/
 
 Contributions, feedback, and suggestions are welcome! If you have ideas for improvements or find any issues, please open an issue or submit a pull request.
 
-## 📄 License
 
-This project is open-source and available under the [MIT License](LICENSE).
